@@ -1,12 +1,23 @@
-# React + Vite
+# Frontend para MVC - CRUD de Jugadores  
+Este proyecto es un frontend desarrollado con React y Vite para gestionar un CRUD de jugadores en un modelo MVC. 
+![image](https://github.com/user-attachments/assets/1ff1784d-5419-438e-b718-3d5757643b58)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Comandos principales
+## Iniciar el servidor de desarrollo:
+npm run dev  
+## Construir para producción:  
+npm run build
+## Previsualizar la versión de producción:
+npm run preview  
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Dependencias principales
+axios: 1.8.4  
+react: 19.0.0  
+react-dom: 19.0.0  
+react-router-dom: 7.4.1  
+# Dependencias de desarrollo
+vite: 6.2.0  
+eslint: 9.21.0  
+@vitejs/plugin-react: 4.3.4  
+Otros plugins y tipos para React y ESLint.  
