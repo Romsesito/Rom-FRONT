@@ -1,34 +1,35 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
-import PlayerTable from './pages/PlayerTable'; // Ruta correcta
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import PlayerTable from './pages/PlayerTable';
+import Login from './pages/LoginPage';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
+
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/players">Players</Link>
-          </li>
-        </ul>
-      </nav>
       <Routes>
+        {/* Ruta de inicio de sesión */}
         <Route
-          path="/"
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
+
+        {/* Ruta protegida para PlayerTable */}
+        <Route
+          path="/players"
           element={
-            <div>
-              <h1>Welcome to Vite + React</h1>
-              <p>Click on the navigation links to explore the app.</p>
-            </div>
+            isAuthenticated ? (
+              <PlayerTable />
+            ) : (
+              <Navigate to="/login" replace /> // Redirige al login si no está autenticado
+            )
           }
         />
-        <Route path="/players" element={<PlayerTable />} />
+
+        {/* Redirige a /login por defecto */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );
