@@ -12,21 +12,35 @@ const PlayerTable = () => {
   const [editingPlayer, setEditingPlayer] = useState(null);
 
   useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const token = localStorage.getItem('authToken'); // Obtén el token del almacenamiento local
+        const response = await axios.get('http://localhost:8080/api/jugadores', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+          },
+        });
+        setPlayers(response.data);
+      } catch (error) {
+        console.error('Error al obtener los jugadores:', error);
+      }
+    };
+
     fetchPlayers();
   }, []);
 
-  const fetchPlayers = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/jugadores');
-      setPlayers(response.data);
-    } catch (error) {
-      console.error('Error al obtener los jugadores:', error);
-    }
-  };
-
   const addPlayer = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/jugadores', newPlayer);
+      const token = localStorage.getItem('authToken'); // Obtén el token
+      const response = await axios.post(
+        'http://localhost:8080/api/jugadores',
+        newPlayer,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+          },
+        }
+      );
       setPlayers([...players, response.data]);
       setNewPlayer({
         nombre: '',
@@ -41,7 +55,12 @@ const PlayerTable = () => {
 
   const deletePlayer = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/jugadores/${id}`);
+      const token = localStorage.getItem('authToken'); // Obtén el token
+      await axios.delete(`http://localhost:8080/api/jugadores/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+        },
+      });
       setPlayers(players.filter((player) => player.id !== id));
     } catch (error) {
       console.error('Error al eliminar el jugador:', error);
@@ -54,9 +73,15 @@ const PlayerTable = () => {
 
   const updatePlayer = async () => {
     try {
+      const token = localStorage.getItem('authToken'); // Obtén el token
       const response = await axios.put(
         `http://localhost:8080/api/jugadores/${editingPlayer.id}`,
-        editingPlayer
+        editingPlayer,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+          },
+        }
       );
       setPlayers(
         players.map((player) =>

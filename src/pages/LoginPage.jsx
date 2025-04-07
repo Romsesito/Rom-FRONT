@@ -21,7 +21,9 @@ const Login = ({ setIsAuthenticated }) => {
         alert('Usuario registrado con éxito');
       } else {
         // Inicio de sesión
-        await axios.post('http://localhost:8080/api/auth/login', form);
+        const response = await axios.post('http://localhost:8080/api/auth/login', form);
+        const token = response.data; // El backend devuelve el token como respuesta
+        localStorage.setItem('authToken', token); // Guarda el token en localStorage
         alert('Inicio de sesión exitoso');
         setIsAuthenticated(true); // Actualiza el estado de autenticación
         navigate('/players'); // Redirige a la página de PlayerTable
