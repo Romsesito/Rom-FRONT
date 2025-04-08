@@ -16,17 +16,17 @@ const Login = ({ setIsAuthenticated }) => {
     e.preventDefault();
     try {
       if (isRegistering) {
-        // Registro de usuario
+
         await axios.post('http://localhost:8080/api/auth/register', form);
         alert('Usuario registrado con éxito');
       } else {
-        // Inicio de sesión
+     
         const response = await axios.post('http://localhost:8080/api/auth/login', form);
-        const token = response.data; // El backend devuelve el token como respuesta
-        localStorage.setItem('authToken', token); // Guarda el token en localStorage
+        const token = response.data; 
+        localStorage.setItem('authToken', token); 
         alert('Inicio de sesión exitoso');
-        setIsAuthenticated(true); // Actualiza el estado de autenticación
-        navigate('/players'); // Redirige a la página de PlayerTable
+        setIsAuthenticated(true); 
+        navigate('/players'); 
       }
       setForm({ username: '', password: '' });
     } catch (error) {

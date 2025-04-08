@@ -14,10 +14,10 @@ const PlayerTable = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const token = localStorage.getItem('authToken'); // Obtén el token del almacenamiento local
+        const token = localStorage.getItem('authToken'); 
         const response = await axios.get('http://localhost:8080/api/jugadores', {
           headers: {
-            Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            Authorization: `Bearer ${token}`,
           },
         });
         setPlayers(response.data);
@@ -31,13 +31,13 @@ const PlayerTable = () => {
 
   const addPlayer = async () => {
     try {
-      const token = localStorage.getItem('authToken'); // Obtén el token
+      const token = localStorage.getItem('authToken'); 
       const response = await axios.post(
         'http://localhost:8080/api/jugadores',
         newPlayer,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            Authorization: `Bearer ${token}`, 
           },
         }
       );
@@ -55,10 +55,10 @@ const PlayerTable = () => {
 
   const deletePlayer = async (id) => {
     try {
-      const token = localStorage.getItem('authToken'); // Obtén el token
+      const token = localStorage.getItem('authToken'); 
       await axios.delete(`http://localhost:8080/api/jugadores/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+          Authorization: `Bearer ${token}`, 
         },
       });
       setPlayers(players.filter((player) => player.id !== id));
@@ -73,13 +73,13 @@ const PlayerTable = () => {
 
   const updatePlayer = async () => {
     try {
-      const token = localStorage.getItem('authToken'); // Obtén el token
+      const token = localStorage.getItem('authToken'); 
       const response = await axios.put(
         `http://localhost:8080/api/jugadores/${editingPlayer.id}`,
         editingPlayer,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            Authorization: `Bearer ${token}`, 
           },
         }
       );
